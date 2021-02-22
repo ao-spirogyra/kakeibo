@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    command: bash -c "rm -f server/tmp/pids/server.pid && bundle exec rails s -p 5000 -b '0.0.0.0'"
+    volumes:
+      - .:/kakeibo
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+    - '.:/kakeibo'
+    - '/kakeibo/client/node_modules'
+    command: bash -c "npm start"
+    ports: 
+      - "3000:3000"
