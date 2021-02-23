@@ -19,12 +19,27 @@ RSpec.describe Expense, type: :model do
         expect(expense.valid?).to eq(false)
       end
     end
+    describe 'type' do
+      let(:expense) { build(:expense, type: '') }
+      it 'must be present' do
+        expect(expense.valid?).to eq(false)
+      end
+    end
   end
   describe 'format' do
     describe 'price' do
       let(:expense) { build(:expense, price: 'aaaaaaaaa') }
       it 'must be a number' do
         expect(expense.valid?).to eq(false)
+      end
+    end
+  end
+  describe 'uniqueness' do
+    describe 'type' do
+      let(:expense) { create(:expense, type: 'test') }
+      let(:dup_expense) { expense.dup }
+      it 'must be unique' do
+        expect(dup_expense.valid?).to eq(false)  
       end
     end
   end

@@ -15,20 +15,13 @@ ActiveRecord::Schema.define(version: 2021_02_23_070056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "expense_types", force: :cascade do |t|
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "expenses", force: :cascade do |t|
-    t.bigint "expense_type_id"
+    t.string "type"
     t.string "thing"
     t.integer "price"
     t.datetime "payed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
   end
 
 end
