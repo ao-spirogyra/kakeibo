@@ -1,0 +1,19 @@
+name: rspec
+
+on:
+  - pull_request
+
+jobs:
+  build:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+      # Install your dependencies
+      - name: Setup docker
+        run: docker-compose build
+      # prepare server
+      - run: docker-compose run web bundle exec rake db:create && docker-compose run web bundle exec rails db:migrate RAILS_ENV=test
+      # Run rspec
+      - run: docker-compose run web bundle exec rspec
