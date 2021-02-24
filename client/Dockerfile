@@ -3,5 +3,6 @@ WORKDIR /kakeibo/client
 COPY package.json /kakeibo/client/package.json
 RUN npm install
 COPY . /kakeibo/client
+ENV CHOKIDAR_USEPOLLING=true
 EXPOSE 3000
 CMD [ "npm", "start" ]
