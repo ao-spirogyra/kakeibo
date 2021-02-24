@@ -32,8 +32,8 @@ jobs:
       # Check out the repository
       - uses: actions/checkout@v1
       # Install your dependencies
-      - run: cd server && gem install bundler && bundle install
+      - run: cd server && docker-compose run web gem install bundler && docker-compose run web bundle install
       # prepare server
-      - run: cd server && bundle exec rake db:create
+      - run: cd server && docker-compose run web bundle exec rake db:create
       # Run rspec
-      - run: cd server && bundle exec rspec
+      - run: cd server && docker-compose run web bundle exec rspec
