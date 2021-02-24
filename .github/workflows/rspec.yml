@@ -1,0 +1,23 @@
+name: rspec
+
+on:
+  - pull_request
+
+jobs:
+  build:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      
+      # Check out the repository
+      - uses: actions/checkout@v1
+
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+        ruby-version: 2.6.6
+      # Install your dependencies
+      - run: cd server && gem install bundler && bundle install
+
+      # Run ESLint
+      - run: cd server && bundle exec rspec
