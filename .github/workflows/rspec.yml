@@ -7,33 +7,14 @@ jobs:
   build:
     name: test
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: myapp_test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    container:
-      image: ruby:2.6.6
-      env:
-        RAILS_ENV: test
-        RAILS_DATABASE_HOST: postgres # this is needed
-        RAILS_DATABASE_USER: postgres
-        RAILS_DATABASE_PASSWORD: password
     steps:
       # Check out the repository
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       # Install your dependencies
-      - run: cd server && docker-compose run web gem install bundler && docker-compose run web bundle install
+      - name: Setup docker
+        run: docker-compose build
+      - run: docker-compose run web gem install bundler && docker-compose run web bundle install
       # prepare server
-      - run: cd server && docker-compose run web bundle exec rake db:create
+      - run: docker-compose run web bundle exec rake db:create
       # Run rspec
-      - run: cd server && docker-compose run web bundle exec rspec
+      - run: docker-compose run web bundle exec rspec
