@@ -1,6 +1,6 @@
 {
   "parser": "@babel/eslint-parser",
-  "plugins": ["@babel", "react", "filenames", "react-hooks"],
+  "plugins": ["react", "react-hooks"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -26,7 +26,7 @@
     "no-multiple-empty-lines": "error",
     "no-unused-vars": ["error", { "args": "none" }],
     "no-console": [
-      "error",
+      "warn",
       {
         "allow": ["warn", "error"]
       }
@@ -39,7 +39,6 @@
         "allowArrowFunctions": true
     }],
     "react/no-string-refs": "error",
-    "filenames/match-exported": "error",
     "react/jsx-indent-props": "off",
     // https://reactjs.org/blog/2019/02/06/react-v16.8.0.html#eslint-plugin-for-react-hooks
     "react-hooks/rules-of-hooks": "error"
