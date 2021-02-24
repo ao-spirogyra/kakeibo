@@ -38,6 +38,7 @@
         "ignoreRefs": true,
         "allowArrowFunctions": true
     }],
+    "react/react-in-jsx-scope": "off",
     "react/no-string-refs": "error",
     "react/jsx-indent-props": "off",
     // https://reactjs.org/blog/2019/02/06/react-v16.8.0.html#eslint-plugin-for-react-hooks
