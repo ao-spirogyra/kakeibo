@@ -1,0 +1,150 @@
+{
+  "parser": "@babel/eslint-parser",
+  "plugins": ["@babel", "react", "filenames", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jest/recommended"
+  ],
+  "env": {"browser": true, "es2020": true},
+  "rules": {
+    "array-bracket-spacing": ["error", "never"],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "block-spacing": ["error", "always"],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "comma-style": ["error", "last"],
+    "eol-last": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
+    "semi": ["error", "always"],
+    "no-var": "error",
+    "no-multiple-empty-lines": "error",
+    "no-unused-vars": ["error", { "args": "none" }],
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "arrow-parens": ["error", "always"],
+    "jest/expect-expect": "off",
+    "react/jsx-no-bind": ["error", {
+        "ignoreRefs": true,
+        "allowArrowFunctions": true
+    }],
+    "react/no-string-refs": "error",
+    "filenames/match-exported": "error",
+    "react/jsx-indent-props": "off",
+    // https://reactjs.org/blog/2019/02/06/react-v16.8.0.html#eslint-plugin-for-react-hooks
+    "react-hooks/rules-of-hooks": "error"
+  },"globals": {
+    "Keen": false,
+    "StripeCheckout": false,
+    "process": true
+  },"overrides": [
+    {
+      "files": "*.ts?(x)",
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint/eslint-plugin"],
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "parserOptions": {
+        "useJSXTextNode": true,
+        "project": "./tsconfig.json",
+        "warnOnUnsupportedTypeScriptVersion": false
+      },
+      "rules": {
+        "no-undef": "off",
+        "react/prop-types": "off",
+        // https://github.com/typescript-eslint/typescript-eslint/issues/1116
+        "no-unused-vars": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-unused-vars": ["error", {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": true,
+          "argsIgnorePattern": "^(_|e$)",
+          "caughtErrors": "all",
+          "caughtErrorsIgnorePattern": "^[_e]$"
+        }],
+        // https://github.com/typescript-eslint/typescript-eslint/issues/1138
+        "no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-expressions": ["error", {
+          "allowShortCircuit": true
+        }],
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "TSEnumDeclaration",
+            "message": "Don't declare const enums"
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/naming-convention": ["error",
+          {
+            "selector": "default",
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow",
+            "filter": {
+              "regex": "^UNSAFE_componentWillReceiveProps$",
+              "match": false
+            }
+          },
+          {
+            "selector": ["variable", "function"],
+            "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "typeLike",
+            "format": ["PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "property",
+            "format": null
+          },
+          {
+            "selector": "variable",
+            "format": ["PascalCase"],
+            "filter": {
+              "regex": "Store$",
+              "match": true
+            }
+          }
+        ],
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/restrict-plus-operands": "off",
+        "@typescript-eslint/promise-function-async": "off",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          {
+            "checksVoidReturn": false
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/ban-ts-comment": ["error", {
+          "ts-expect-error": false,
+          "ts-ignore": true,
+          "ts-nocheck": true,
+          "ts-check": false
+        }],
+        "@typescript-eslint/no-non-null-assertion": "warn"
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
