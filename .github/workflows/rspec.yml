@@ -29,9 +29,10 @@ jobs:
         RAILS_DATABASE_USER: postgres
         RAILS_DATABASE_PASSWORD: password
     steps:
-    　- run: cd server && bundle exec rake db:create
       # Check out the repository
       - uses: actions/checkout@v1
+      # prepare server
+      - run: cd server && bundle exec rake db:create
       # Install your dependencies
       - run: cd server && gem install bundler && bundle install
 
