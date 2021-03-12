@@ -5,4 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Expense.create(type: 'aaa', thing: 'aaa', price: 1000, payed_at:Time.now)
+ExpenseDetail.create(type: 'aaa', thing: 'aaa', price: 1000, payed_at:Time.now)
+Expense.create(type: 'aaa', payed_at: Time.now, price: 1000)
