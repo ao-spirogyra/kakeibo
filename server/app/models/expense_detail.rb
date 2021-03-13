@@ -4,4 +4,5 @@ class ExpenseDetail < ApplicationRecord
   validates :payed_at, presence: true
   self.inheritance_column = :_type_disabled
   validates :type, presence: true, uniqueness: true
+  belongs_to :expense
 end
