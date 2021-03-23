@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Table.css';
 import { TableModal } from './TableModal';
+import { Cell } from './Cell';
 import { useExpenses } from '../hooks/useExpenses';
 
 
@@ -51,24 +52,6 @@ const Column: React.FC<ColumnProps> = ({
   day?,
   totalPrice
 }) => {
-  
-  return (
-    <div className='column'>
-      <Cell defaultValue={day}/>
-      {
-        totalPrice.map((price) => {
-          return <Cell key={price} defaultValue={price}/>;
-        })
-      }
-    </div>
-  );
-};
-
-interface CellProps {
-  defaultValue?: string
-}
-
-const Cell: React.FC<CellProps> = ({defaultValue}: {defaultValue?}) => {
   const [showModal, setShowModal] = useState(false);
   const onCellClicked = () => {
     setShowModal(true);
@@ -76,16 +59,13 @@ const Cell: React.FC<CellProps> = ({defaultValue}: {defaultValue?}) => {
   const onCloseClicked = () => {
     setShowModal(false);
   };
-  const renderCell = () => {
-    return (
-      <input type="text" defaultValue={defaultValue} onClick={onCellClicked}/>
-    );
-  };
-
   return (
-    <div className='cell'>
+    <div className='column'>
+      <Cell defaultValue={day}/>
       {
-        renderCell()
+        totalPrice.map((price) => {
+          return <Cell key={price} defaultValue={price} onCellClicked={onCellClicked}/>;
+        })
       }
       {
         <TableModal show={showModal} onCloseClicked={onCloseClicked}/>
@@ -93,4 +73,5 @@ const Cell: React.FC<CellProps> = ({defaultValue}: {defaultValue?}) => {
     </div>
   );
 };
+
 
