@@ -14,7 +14,7 @@ export const Table: React.FC = () => {
       <FirstColumn expenseTypes={expenseTypes}/>
       {
         days.map((day, index) => {
-          return <Column day={day} key={day.toString()} totalPrice={totalPrice[index]}/>;
+          return <Column day={day} key={day} totalPrice={totalPrice[index]}/>;
         })
       }
     </div>
