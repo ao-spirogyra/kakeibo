@@ -15,23 +15,38 @@ ActiveRecord::Schema.define(version: 2021_02_23_070056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "expense_details", force: :cascade do |t|
-    t.bigint "expenses_id"
-    t.string "type"
-    t.string "thing"
-    t.integer "price"
-    t.datetime "payed_at"
+  create_table "expense_dates", force: :cascade do |t|
+    t.string "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["expenses_id"], name: "index_expense_details_on_expenses_id"
+  end
+
+  create_table "expense_details", force: :cascade do |t|
+    t.string "thing"
+    t.integer "price"
+    t.bigint "expense_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_id"], name: "index_expense_details_on_expense_id"
+  end
+
+  create_table "expense_types", force: :cascade do |t|
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.string "payed_at"
-    t.integer "price"
-    t.string "type"
+    t.integer "value"
+    t.bigint "expense_type_id"
+    t.bigint "expense_date_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["expense_date_id"], name: "index_expenses_on_expense_date_id"
+    t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
   end
 
+  add_foreign_key "expense_details", "expenses"
+  add_foreign_key "expenses", "expense_dates"
+  add_foreign_key "expenses", "expense_types"
 end
