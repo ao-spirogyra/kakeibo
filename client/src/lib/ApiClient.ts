@@ -1,8 +1,6 @@
-import { Expenses } from '../hooks/useExpenses';
-
 type HttpProtocol = 'GET' | 'POST' | 'DELETE'
 
-export const apiClient = (method: HttpProtocol, url: string, body?: Object, cors = true): Promise<Expenses[]> => {
+export const apiClient = <T> (method: HttpProtocol, url: string, body?: Object, cors = true): Promise<T> => {
   return fetch(`http://localhost:5000${url}`, {
     method: method,
     mode: cors ? 'cors' : 'no-cors',

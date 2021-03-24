@@ -15,7 +15,7 @@ export const useExpenses = () => {
   const [totalPrice, setTotalPrice] = useState<Array<Array<number>>>();
   useEffect(() => {
     const f = async () => {
-      const res = await apiClient('GET', '/api/expenses');
+      const res = await apiClient<Expenses[]>('GET', '/api/expenses');
       const days =
         Array.from(
           new Set(
