@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 2021_02_23_070056) do
   end
 
   create_table "expense_details", force: :cascade do |t|
-    t.string "thing"
+    t.string "item"
     t.integer "price"
+    t.string "memo"
     t.bigint "expense_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -8,4 +8,4 @@
 type = ExpenseType.create!(type: 'aaa')
 date = ExpenseDate.create!(date: Time.now)
 expense = Expense.create!(value: 1000, expense_type_id: type.id, expense_date_id: date.id)
-ExpenseDetail.create!(thing: 'aaa', price: 1000, expense_id: expense.id)
+ExpenseDetail.create!(item: 'aaa', price: 1000, memo: 'memo', expense_id: expense.id)

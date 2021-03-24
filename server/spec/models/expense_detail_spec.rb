@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe ExpenseDetail, type: :model do
   describe 'presence' do
-    describe 'thing' do
-      let(:expense_detail) { build(:expense_detail, thing: '') }
+    describe 'item' do
+      let(:expense_detail) { build(:expense_detail, item: '') }
       it 'must be present' do
         expect(expense_detail.valid?).to eq(false)
       end
