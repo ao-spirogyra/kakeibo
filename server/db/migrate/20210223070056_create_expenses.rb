@@ -18,8 +18,9 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
     end
 
     create_table :expense_details do |t|
-      t.string :thing
+      t.string :item
       t.integer :price
+      t.string :memo
       t.references :expense, foreign_key: true
       t.timestamps
     end
