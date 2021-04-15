@@ -1,7 +1,8 @@
 class Expense < ApplicationRecord
-  validates :thing, presence: true
-  validates :price, presence: true, numericality: true
-  validates :payed_at, presence: true
-  self.inheritance_column = :_type_disabled
-  validates :type, presence: true, uniqueness: true
+  has_many :expense_details
+  belongs_to :expense_type, optional: true
+  belongs_to :expense_date, optional: true
+  validates :expense_type_id, presence: true, numericality: true
+  validates :expense_date_id, presence: true, numericality: true
+  validates :value, presence: true, numericality: true
 end
