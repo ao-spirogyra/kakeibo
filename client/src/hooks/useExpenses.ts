@@ -4,7 +4,7 @@ import { apiClient } from '../lib/ApiClient';
 export interface Expenses {
   id: number,
   type: string,
-  price: number,
+  value: number,
   payed_at: string
 }
 
@@ -12,7 +12,10 @@ export interface Expenses {
 export const useExpenses = () => {
   const [days, setDays] = useState<Array<string>>([]);
   const [expenseTypes, setExpenseTypes] = useState<Array<string>>([]);
-  const [totalPrice, setTotalPrice] = useState<Array<Array<number>>>();
+  const [contentOfCells, setContentOfCell] = useState<Array<Array<{
+    totalPrice: number,
+    expenseId: number
+  }>>>();
   useEffect(() => {
     const f = async () => {
       const res = await apiClient<Expenses[]>('GET', '/api/expenses');
@@ -38,18 +41,21 @@ export const useExpenses = () => {
       setExpenseTypes(
         expenseTypes
       );
-      const totalPrice = days.map((day) => {
+      const contentOfCells = days.map((day) => {
         return res.filter((expense) =>
           expense.payed_at === day
         ).map((filteredExpense) => {
-          return filteredExpense.price;
+          return {
+            totalPrice: filteredExpense.value,
+            expenseId: filteredExpense.id
+          };
         });
       });
-      setTotalPrice(
-        totalPrice
+      setContentOfCell(
+        contentOfCells
       );
     };
     f();
   }, []);
-  return {days, expenseTypes, totalPrice};
+  return {days, expenseTypes, contentOfCells};
 };
